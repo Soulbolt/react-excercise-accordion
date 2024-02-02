@@ -18,17 +18,25 @@ const faqs = [
 export default function App() {
   return (
     <div>
-      <Accordion />
+      <Accordion data={faqs} />
+    </div>
+  );
+}
+// Pass on attributes as parameters to the AccordionItem component
+function Accordion({ data }) {
+  return (
+    <div className="accordion">
+      {data.map((faq, i) => (
+        <AccordionItem title={faq.title} text={faq.text} num={i} key={i} />
+      ))}
     </div>
   );
 }
 
-function Accordion() {}
-
-function AccordionItem(num, title, text) {
+function AccordionItem({ num, title, text }) {
   return (
     <div className="item">
-      <p className="number">{num}</p>
+      <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
       <p className="title">{title}</p>
       <p className="icon">-</p>
       <div className="content-box">{text}</div>
